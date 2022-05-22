@@ -5,9 +5,17 @@ body {
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color:#F1F2F6;
+    color:#272343
   }
   
   code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
+  }
+  .login-bg{
+    background: url("https://dev-to-uploads.s3.amazonaws.com/uploads/articles/gnugqe1o6fsh4pcnrzmr.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 0% 100%  ;
   }
