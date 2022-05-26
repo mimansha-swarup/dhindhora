@@ -15,9 +15,12 @@ import {
 } from "@mui/material";
 import { red } from "@mui/material/colors";
 import { useState } from "react";
-import { signUpModalStyle } from "../../styles/Loginstyle";
+import {  
+  LoginStyles } from "../../styles/Loginstyle";
 
 export const SignUpModal = ({ isOpen, onClose }) => {
+  const {signUpModalStyle} = 
+  LoginStyles
   const [passwordState, setPasswordState] = useState({
     isError: false,
     showPassword: false,

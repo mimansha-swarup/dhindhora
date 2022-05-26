@@ -15,16 +15,13 @@ import {
   useTheme,
   Stack,
 } from "@mui/material";
-import {
-  loginBoxStyle,
-  loginContainerStyle,
-  loginLogoBoxStyle,
-  paperStyle,
-} from "../styles/Loginstyle";
+import {Link} from "react-router-dom"
+import { LoginStyles } from "../styles/Loginstyle";
 import { SignUpModal } from "../component";
 
 export const LoginPage = () => {
   const { palette } = useTheme();
+  const {loginContainerStyle,loginBoxStyle,loginLogoBoxStyle,paperStyle} = LoginStyles;
 
   const [loginLocalActions, setLoginLocalActions] = useState({
     showPassword: false,
@@ -47,102 +44,103 @@ export const LoginPage = () => {
   };
 
   return (
-    <div className="login-bg" >
-
-    <Container sx={loginContainerStyle} >
-      <Box sx={loginBoxStyle}>
-        <Box sx={loginLogoBoxStyle} >
-          <Typography
-            variant="h2"
-            fontWeight={"500"}
-            component="h2"
-            color={palette.primary.main}
-          >
-            Dhindhora
-          </Typography>
-          <Typography
-            variant="body1"
-            maxWidth={"25rem"}
-            textAlign={"start"}
-            component="p"
-          >
-            Dhindhora allows you to share your true self with those you care
-            about.
-          </Typography>
+    <div className="login-bg">
+      <Container sx={loginContainerStyle}>
+        <Box sx={loginBoxStyle}>
+          <Box sx={loginLogoBoxStyle}>
+            <Typography
+              variant="h2"
+              fontWeight={"500"}
+              component="h2"
+              color={palette.primary.main}
+            >
+              Dhindhora
+            </Typography>
+            <Typography
+              variant="body1"
+              maxWidth={"25rem"}
+              textAlign={"start"}
+              component="p"
+            >
+              Dhindhora allows you to share your true self with those you care
+              about.
+            </Typography>
+          </Box>
+          <Paper sx={paperStyle} elevation={3}>
+            <form onSubmit={handleFormChange}>
+              <Stack gap={2}>
+                <FormControl variant="outlined">
+                  <InputLabel htmlFor="email">Email</InputLabel>
+                  <OutlinedInput
+                    required
+                    id="email"
+                    type="text"
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <IconButton edge="start">
+                          <EmailOutlined />
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    label="email"
+                  />
+                </FormControl>
+                <FormControl variant="outlined">
+                  <InputLabel htmlFor="password">Password</InputLabel>
+                  <OutlinedInput
+                    required
+                    id="password"
+                    type={loginLocalActions.showPassword ? "text" : "password"}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          edge="end"
+                        >
+                          {loginLocalActions.showPassword ? (
+                            <VisibilityOff />
+                          ) : (
+                            <Visibility />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    label="Password"
+                  />
+                </FormControl>
+                <Button
+                  size="large"
+                  variant="contained"
+                  color="info"
+                  type="submit"
+                >
+                  Log in
+                </Button>
+              </Stack>
+            </form>
+            <Link to="/">
+            <Button size="small" variant="text" sx={{ m: 0 }} color="info">
+              Log in as Guest
+            </Button>
+            </Link>
+            <Divider />
+            <Button
+              sx={{ width: "75%", mx: "auto", my: 1, p: 1.25 }}
+              size="small"
+              variant="contained"
+              color={"success"}
+              onClick={handleOpenModal}
+            >
+              Create New Account
+            </Button>
+          </Paper>
         </Box>
-        <Paper sx={paperStyle} elevation={3}>
-          <form onSubmit={handleFormChange}>
-            <Stack gap={2}>
-              <FormControl variant="outlined">
-                <InputLabel htmlFor="email">Email</InputLabel>
-                <OutlinedInput
-                  required
-                  id="email"
-                  type="text"
-                  startAdornment={
-                    <InputAdornment position="start">
-                      <IconButton edge="start">
-                        <EmailOutlined />
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="email"
-                />
-              </FormControl>
-              <FormControl variant="outlined">
-                <InputLabel htmlFor="password">Password</InputLabel>
-                <OutlinedInput
-                  required
-                  id="password"
-                  type={loginLocalActions.showPassword ? "text" : "password"}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        edge="end"
-                      >
-                        {loginLocalActions.showPassword ? (
-                          <VisibilityOff />
-                        ) : (
-                          <Visibility />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="Password"
-                />
-              </FormControl>
-              <Button
-                size="large"
-                variant="contained"
-                color="info"
-                type="submit"
-              >
-                Log in
-              </Button>
-            </Stack>
-          </form>
-          <Button size="small" variant="text" sx={{ m: 0 }} color="info">
-            Log in as Guest
-          </Button>
-          <Divider />
-          <Button
-            sx={{ width: "75%", mx: "auto", my: 1, p: 1.25 }}
-            size="small"
-            variant="contained"
-            color={"success"}
-            onClick={handleOpenModal}
-          >
-            Create New Account
-          </Button>
-        </Paper>
-      </Box>
-      <SignUpModal
-        isOpen={loginLocalActions.openModal}
-        onClose={handleOpenModal}
-      />
-    </Container>
-                  </div>
+        <SignUpModal
+          isOpen={loginLocalActions.openModal}
+          onClose={handleOpenModal}
+        />
+      </Container>
+    </div>
   );
 };
