@@ -10,9 +10,9 @@ import {
 import { RequiresAuth } from "./requiresAuth";
 export const AllRoutes = () => {
   const {
-    auth: { token, userData },
+    auth: { token },
   } = useSelector((state) => state);
-  console.log(userData);
+
   return (
     <Routes>
       <Route element={<RequiresAuth />}>

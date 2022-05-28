@@ -8,13 +8,10 @@ export const loginHandler = createAsyncThunk(
 
   async ({ username, password }, { rejectWithValue }) => {
     try {
-      console.log("data")
       const { status, data } = await axios.post(loginRoute, {
         username,
         password,
       });
-      // const { status, data } = await axios.post("/api/auth/login", { username, password });
-      console.log("data",data)
 
       if (status === 200)
         localStorage.setItem(

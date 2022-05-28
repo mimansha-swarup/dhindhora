@@ -20,6 +20,8 @@ export const authSlice = createSlice({
   },
   extraReducers: {
     [loginHandler.pending]: (state, { payload }) => {
+      //  willl handle  pending and full fillled later 
+      // ignore console.log
       console.log("loading")
       
     },
@@ -29,7 +31,7 @@ export const authSlice = createSlice({
       state.userData = payload.foundUser;
     },
     [loginHandler.rejected]: (state, { payload }) => {
-      console.log("failed")
+      //  willl handle  pending and full fillled later
       console.log(payload)
       
     },
