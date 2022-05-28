@@ -2,12 +2,9 @@ export const SuggestionCardStyles = {
   SuggestionContainerStyle: (theme) => ({
     p: 2,
     borderRadius: 3,
-    // boxShadow: theme.shadows[3],
-    // backgroundColor: theme.palette.grey[100],
     display: {lg:"flex",sm:"none",xs:"none"},
     flexWrap: "wrap",
-    // width: "90%",
-    // m: "auto",
+
   }),
   ListStyle: {
     display: "flex",
@@ -23,12 +20,10 @@ export const SuggestionCardStyles = {
     borderRadius: 1,
     boxShadow: theme.shadows[1],
     display: "flex",
-
+    justifyContent: "center",
     flexWrap: "wrap",
     gap: 2,
-
     alignItems: "center",
-    justifyContent: "start",
     backgroundColor: theme.palette.background.paper,
   }),
 };

@@ -15,17 +15,19 @@ import {
 } from "@mui/material";
 import { red } from "@mui/material/colors";
 import { useState } from "react";
-import {  
-  LoginStyles } from "../../styles/Loginstyle";
+import { useDispatch } from "react-redux";
+
+import { signUpHandler } from "../../helper/auth";
+import { LoginStyles } from "../../styles/Loginstyle";
 
 export const SignUpModal = ({ isOpen, onClose }) => {
-  const {signUpModalStyle} = 
-  LoginStyles
+  const { signUpModalStyle } = LoginStyles;
   const [passwordState, setPasswordState] = useState({
     isError: false,
     showPassword: false,
     showConfirmPassword: false,
   });
+const dispatch = useDispatch()
 
   const handleClickShowPassword = (key) =>
     setPasswordState((prevState) => ({ ...prevState, [key]: !prevState[key] }));
@@ -33,13 +35,14 @@ export const SignUpModal = ({ isOpen, onClose }) => {
     event.preventDefault();
     const firstName = event.target.firstName.value;
     const lastName = event.target.lastName.value;
-    const email = event.target.email.value;
+    const username = event.target.username.value;
     const password = event.target.password.value;
     const confirmPassword = event.target.confirmPassword.value;
     if (password === confirmPassword) {
-      console.log(email, password);
+      console.log(username, password);
       setPasswordState((prevState) => ({ ...prevState, isError: false }));
-      onClose()
+      dispatch(signUpHandler({firstName,lastName,username,password}))
+      onClose();
     } else {
       setPasswordState((prevState) => ({ ...prevState, isError: true }));
     }
@@ -70,7 +73,7 @@ export const SignUpModal = ({ isOpen, onClose }) => {
                 <TextField required id="firstName" label="First Name" />
                 <TextField required id="lastName" label="Last Name" />
               </Stack>
-              <TextField required id="email" label="Email" type="email" />
+              <TextField required id="username" label="Username" />
 
               <FormControl variant="outlined">
                 <InputLabel htmlFor="password" error={passwordState.isError}>

@@ -8,11 +8,16 @@ import { formatDate } from "../utils/authUtils";
 export const users = [
   {
     _id: uuid(),
-    firstName: "Adarsh",
-    lastName: "Balika",
-    username: "adarshbalika",
-    password: "adarshBalika123",
+    firstName: "Itachi",
+    lastName: "Uchiha",
+    username: "slayer",
+    password: "clankiller123",
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    bio: "Anbu Captain and Akatsuki Member",
+    website: "https://itachi.konoha",
+    profilePicture: "https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ugzu90pdvdk6tb3byqg4.png",
+    followers: [],
+    following: [],
   },
 ];

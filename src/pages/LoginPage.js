@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { EmailOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
+import {   PersonOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
 import {
   Container,
   FormControl,
@@ -15,9 +15,10 @@ import {
   useTheme,
   Stack,
 } from "@mui/material";
-import {Link} from "react-router-dom"
 import { LoginStyles } from "../styles/Loginstyle";
 import { SignUpModal } from "../component";
+import { useDispatch } from "react-redux";
+import { loginHandler } from "../helper/auth";
 
 export const LoginPage = () => {
   const { palette } = useTheme();
@@ -27,6 +28,8 @@ export const LoginPage = () => {
     showPassword: false,
     openModal: false,
   });
+
+ const dispatch  = useDispatch()
   const handleClickShowPassword = () =>
     setLoginLocalActions((prevState) => ({
       ...prevState,
@@ -40,8 +43,16 @@ export const LoginPage = () => {
 
   const handleFormChange = (event) => {
     event.preventDefault();
-    console.log(event);
+    const username = event.target.username.value;
+    const password = event.target.password.value;
+    dispatch(loginHandler({username,password}))
+    // event.reset();
   };
+  
+  const LoginWithTestCredential = () =>{
+    
+    dispatch(loginHandler({username:"slayer",password:"clankiller123"}))
+  }
 
   return (
     <div className="login-bg">
@@ -70,19 +81,19 @@ export const LoginPage = () => {
             <form onSubmit={handleFormChange}>
               <Stack gap={2}>
                 <FormControl variant="outlined">
-                  <InputLabel htmlFor="email">Email</InputLabel>
+                  <InputLabel htmlFor="username">Username</InputLabel>
                   <OutlinedInput
                     required
-                    id="email"
+                    id="username"
                     type="text"
                     startAdornment={
                       <InputAdornment position="start">
                         <IconButton edge="start">
-                          <EmailOutlined />
+                          <PersonOutlined />
                         </IconButton>
                       </InputAdornment>
                     }
-                    label="email"
+                    label="Username"
                   />
                 </FormControl>
                 <FormControl variant="outlined">
@@ -119,11 +130,11 @@ export const LoginPage = () => {
                 </Button>
               </Stack>
             </form>
-            <Link to="/">
-            <Button size="small" variant="text" sx={{ m: 0 }} color="info">
+     
+            <Button onClick={LoginWithTestCredential} size="small" variant="text" sx={{ m: 0 }} color="info">
               Log in as Guest
             </Button>
-            </Link>
+           
             <Divider />
             <Button
               sx={{ width: "75%", mx: "auto", my: 1, p: 1.25 }}

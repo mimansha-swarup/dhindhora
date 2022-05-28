@@ -15,6 +15,7 @@ export const AddPost = () => {
         <TextField
           multiline
           hiddenLabel
+          InputProps={{disableUnderline:true}}
           rows={2}
           sx={AddPostInputStyle}
           id="addPost"

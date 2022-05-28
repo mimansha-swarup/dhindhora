@@ -6,12 +6,14 @@ import {
   Typography,
   MenuItem,
 } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { AddRounded,  Logout, Person } from "@mui/icons-material";
 
 import { brandImage } from "../../assets";
 import { navigationItems } from "../../utils/navigationActions";
 import { NavStyles } from "../../styles/NavbarStyle";
-import { Link } from "react-router-dom";
-import { AddRounded, Login, Logout, Person } from "@mui/icons-material";
+import { signOutHandler } from "../../features/auth/authSlice";
 const Navbar = () => {
   const {
     brandImageStyle,
@@ -23,9 +25,20 @@ const Navbar = () => {
     userNameChipStyle,
   } = NavStyles;
 
+  
+  const {
+    auth: {  userData },
+  } = useSelector((state) => state);
+
+  const dispatch = useDispatch()
+  
+
   return (
     <AppBar position="fixed" color="inherit" sx={NavbarStyle}>
+      <Link to="/">
+
       <Avatar alt="brandLogo" sx={brandImageStyle} src={brandImage} />
+      </Link>
       <Toolbar sx={appBarStyle}>
         {navigationItems.map((snap) => (
           <Link key={snap.id} to={snap.link}>
@@ -46,17 +59,18 @@ const Navbar = () => {
           <Box sx={userNameChipStyle}>
             <Avatar
               alt="ProfilePicture"
-              src="https://media1.thehungryjpeg.com/thumbs2/ori_3944071_je7b4gk3datpeei8e81xyz2xb35qiqxtrjicl1qx_woman-avatar-icon-vector-flat.jpg"
+              src={userData.profilePicture}
               sx={dpStyle}
             />
             <Typography variant="caption" component="span">
-              @monkesh
+              @{userData.username}
             </Typography>
           </Box>
         </Link>
-        <Link to="/login">
-          <Logout />
-        </Link>
+        <div onClick={()=>dispatch(signOutHandler())} >
+          <Logout  />
+        </div>
+   
       </Toolbar>
     </AppBar>
   );
