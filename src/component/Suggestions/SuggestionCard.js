@@ -12,11 +12,12 @@ export const SuggestionCard = () => {
       </Typography>
       <List sx={ListStyle}>
         {[
-          [...Array(5)].map((el) => (
-            <ListItem key={el} sx={ListTileStyle}>
+          [...Array(5)].map((e,i) => (
+            <ListItem key={i} sx={ListTileStyle}>
               <Avatar
                 alt="profile-suggestion"
                 src="https://bestcellphonespyapps.com/wp-content/uploads/2017/09/pexels-photo-220453-1-1001x1024.jpeg"
+    
               />
               <Stack>
                 <Typography textAlign="center" variant="body2">

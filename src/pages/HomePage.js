@@ -41,8 +41,8 @@ export const HomePage = () => {
         </Stack>
         </Divider>
       </Stack>
-      {[...Array(11)].map((e) => (
-        <Post key={e} />
+      {[...Array(5)].map((e,i) => (
+        <Post key={i} />
       ))}
     </HomeLayout>
   );
