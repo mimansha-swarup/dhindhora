@@ -6,8 +6,9 @@ import {
   MenuList,
   Chip,
 } from "@mui/material";
-import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import { navigationItems } from "../../utils/navigationActions";
 import { SideBarStyles } from "../../styles/SideBarListStyle";
 
@@ -18,17 +19,21 @@ export const Sidebar = () => {
     NavigationLinksStyle,
     ProfileTileStyle,
   } = SideBarStyles;
+
+  const {
+    auth: { userData },
+  } = useSelector((state) => state);
   return (
     <MenuList sx={SideBarContainer}>
       <Link to="/profile">
         <MenuItem sx={ProfileTileStyle}>
           <Avatar
             alt="profilepic"
-            src="https://media1.thehungryjpeg.com/thumbs2/ori_3944071_je7b4gk3datpeei8e81xyz2xb35qiqxtrjicl1qx_woman-avatar-icon-vector-flat.jpg"
+            src={userData.profilePicture}
           />
 
           <ListItemText>
-            <Chip sx={UsernameChipStyle} label={"@monkesxxxxxxxxxxxxxxxxch"} />
+            <Chip sx={UsernameChipStyle} label={userData.username} />
           </ListItemText>
         </MenuItem>
       </Link>
