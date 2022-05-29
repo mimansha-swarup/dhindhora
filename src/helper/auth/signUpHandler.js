@@ -1,12 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { signUpRoute } from "../../utils/routeConstant";
+import { signUpApi } from "../../utils/api";
 
 export const signUpHandler = createAsyncThunk(
   "auth/signup",
   async ({ firstName, lastName, username, password }, { rejectWithValue }) => {
     try {
-      const { status, data } = await axios.post(signUpRoute, {
+      const { status, data } = await axios.post(signUpApi, {
         firstName,
         lastName,
         username,

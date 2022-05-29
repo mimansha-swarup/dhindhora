@@ -1,14 +1,15 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { loginRoute } from "../../utils/routeConstant";
+import { loginApi } from "../../utils/api";
+
 
 export const loginHandler = createAsyncThunk(
   "auth/login",
 
   async ({ username, password }, { rejectWithValue }) => {
     try {
-      const { status, data } = await axios.post(loginRoute, {
+      const { status, data } = await axios.post(loginApi, {
         username,
         password,
       });
@@ -18,6 +19,7 @@ export const loginHandler = createAsyncThunk(
           "dhindhora_data",
           JSON.stringify({ token: data.encodedToken, userData: data.foundUser })
         );
+       
       return data;
     } catch (err) {
       return rejectWithValue(err.response.data.errors[0]);
