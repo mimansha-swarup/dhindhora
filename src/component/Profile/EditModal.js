@@ -53,13 +53,13 @@ export const EditModal = ({ currUser, open, onClose }) => {
           method: "POST",
           body: formData,
         });
-        console.log(response);
+     
         const { url } = await response.json();
-        console.log(url);
+       
         setProfilePictureData((prev) => ({ ...prev, url }));
         setProfilePictureData((prev) => ({ ...prev, loading: false }));
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     }
   };
@@ -76,7 +76,7 @@ export const EditModal = ({ currUser, open, onClose }) => {
         ? profilePictureData.url
         : currUser.profilePicture,
     };
-    console.log(profilePictureData);
+
     dispatch(editUser({ userData: { ...currUser, ...updatedData }, token }));
     onClose();
   };
