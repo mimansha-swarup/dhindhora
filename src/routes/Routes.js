@@ -19,7 +19,7 @@ export const AllRoutes = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/bookmark" element={<BookmarkPage />} />
         <Route path="/explore" element={<ExplorePage />} />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/profile/:username" element={<ProfilePage />} />
       </Route>
       {token ? (
         <Route path="/login" element={<Navigate to="/" replace />} />

@@ -15,12 +15,12 @@ export const HomeLayout = ({children}) => {
         <Grid item sm={3} lg={2} xs={0}>
           <Sidebar />
         </Grid>
-        <Grid item  sm={9} lg={8} xs={12}>
+        <Grid item  sm={9} lg={7} xs={12}>
          <Box sx={contentBoxStyle}>
            {children}
          </Box>
         </Grid>
-        <Grid item sm={0} lg={2} xs={0}>
+        <Grid item sm={0} lg={3} xs={0}>
           <SuggestionCard />
         </Grid>
       </Grid>

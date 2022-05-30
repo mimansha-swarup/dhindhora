@@ -8,5 +8,5 @@ export const SideBarStyles = {
   },
   NavigationLinksStyle:{ display: "flex", gap: 1.5 ,p:0} ,
   ProfileTileStyle: { display: "flex", p: 0, },
-  UsernameChipStyle:{ background: "inherit", m: 0 }
+  UsernameChipStyle:{ background: "inherit", m: 0,mr:"auto",width:"100%" }
 };
