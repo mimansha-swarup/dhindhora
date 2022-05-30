@@ -55,8 +55,8 @@ export const SuggestionCard = () => {
                 style={{ width: "100%", display: "flex" }}
                 to={`/profile/${username}`}
               >
-                <ListItemAvatar>
-                  <Avatar alt={firstName} src={profilePicture} />
+                <ListItemAvatar sx={{display:"flex"}} >
+                  <Avatar alt={firstName} sx={{my:"auto"}} src={profilePicture} />
                 </ListItemAvatar>
                 <ListItemText
                   primary={`${firstName} ${lastName}`}
