@@ -22,8 +22,8 @@ export const authSlice = createSlice({
     [loginHandler.pending]: (state, { payload }) => {
       //  willl handle  pending and full fillled later 
       // ignore console.log
-      console.log("loading")
-      
+      // console.log("loading")
+      // 
     },
     [loginHandler.fulfilled]: (state, { payload }) => {
       console.log("fulfilled")
@@ -32,7 +32,7 @@ export const authSlice = createSlice({
     },
     [loginHandler.rejected]: (state, { payload }) => {
       //  willl handle  pending and full fillled later
-      console.log(payload)
+      // console.log(payload)
       
     },
     [signUpHandler.fulfilled]: (state, { payload }) => {
