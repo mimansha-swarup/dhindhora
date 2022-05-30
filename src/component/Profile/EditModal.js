@@ -104,8 +104,8 @@ export const EditModal = ({ currUser, open, onClose }) => {
               />
               <input
                 accept="image/*"
-                id="profilePicture"
-                name="profilePicture"
+                id="profile-Picture"
+                name="profile-Picture"
                 style={{ display: "none" }}
                 type="file"
                 onChange={(e) => {
@@ -117,7 +117,7 @@ export const EditModal = ({ currUser, open, onClose }) => {
                 }}
               />
 
-              <label style={UploadImageStyle} htmlFor="profilePicture">
+              <label style={UploadImageStyle} htmlFor="profile-Picture">
                 <AddAPhoto style={UploadIconStyle} />
               </label>
             </Box>
