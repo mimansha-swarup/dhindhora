@@ -2,17 +2,21 @@ export const SuggestionCardStyles = {
   SuggestionContainerStyle: (theme) => ({
     p: 2,
     borderRadius: 3,
-    display: {lg:"flex",sm:"none",xs:"none"},
-    flexWrap: "wrap",
-
+    display: { lg: "flex", sm: "none", xs: "none" },
+    flexDirection: "column",
+ 
   }),
+
   ListStyle: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    width: "100%",
     gap: 2,
+  },
+  ListAvatarStyle: {
+    height: "64px",
+    width: "64px",
   },
   ListTileStyle: (theme) => ({
     px: 2,
@@ -21,8 +25,8 @@ export const SuggestionCardStyles = {
     boxShadow: theme.shadows[1],
     display: "flex",
     justifyContent: "center",
-    flexWrap: "wrap",
-    gap: 2,
+    width: "100%",
+    gap: 1,
     alignItems: "center",
     backgroundColor: theme.palette.background.paper,
   }),

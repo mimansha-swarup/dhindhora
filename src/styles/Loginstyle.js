@@ -54,11 +54,11 @@ export const LoginStyles = {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: {
-      xs: "70%",
+      xs: "77%",
       sm: 400,
     },
     bgcolor: "background.paper",
     boxShadow: 20,
-    p: 4,
+    p: {xs:2,sm:4},
   },
 };
