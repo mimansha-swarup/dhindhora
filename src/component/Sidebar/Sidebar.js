@@ -1,6 +1,5 @@
 import {
   ListItemIcon,
-  Avatar,
   ListItemText,
   MenuItem,
   MenuList,
@@ -11,6 +10,7 @@ import { useSelector } from "react-redux";
 
 import { navigationItems } from "../../utils/navigationActions";
 import { SideBarStyles } from "../../styles/SideBarListStyle";
+import { CurrentAvatar } from "../Home/CurrentAvatar";
 
 export const Sidebar = () => {
   const {
@@ -25,14 +25,11 @@ export const Sidebar = () => {
   } = useSelector((state) => state);
   return (
     <MenuList sx={SideBarContainer}>
-      <Link to="/profile">
+      <Link to={`/profile/${userData.username}`}>
         <MenuItem sx={ProfileTileStyle}>
-          <Avatar
-            alt="profilepic"
-            src={userData.profilePicture}
-          />
+          <CurrentAvatar />
 
-          <ListItemText>
+          <ListItemText sx={{display:"flex",}} >
             <Chip sx={UsernameChipStyle} label={userData.username} />
           </ListItemText>
         </MenuItem>

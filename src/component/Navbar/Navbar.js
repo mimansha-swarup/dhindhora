@@ -8,12 +8,13 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { AddRounded,  Logout, Person } from "@mui/icons-material";
+import { AddRounded, Logout, Person } from "@mui/icons-material";
 
 import { brandImage } from "../../assets";
 import { navigationItems } from "../../utils/navigationActions";
 import { NavStyles } from "../../styles/NavbarStyle";
 import { signOutHandler } from "../../features/auth/authSlice";
+import { CurrentAvatar } from "../Home/CurrentAvatar";
 const Navbar = () => {
   const {
     brandImageStyle,
@@ -25,19 +26,16 @@ const Navbar = () => {
     userNameChipStyle,
   } = NavStyles;
 
-  
   const {
-    auth: {  userData },
+    auth: { userData },
   } = useSelector((state) => state);
 
-  const dispatch = useDispatch()
-  
+  const dispatch = useDispatch();
 
   return (
     <AppBar position="fixed" color="inherit" sx={NavbarStyle}>
       <Link to="/">
-
-      <Avatar alt="brandLogo" sx={brandImageStyle} src={brandImage} />
+        <Avatar alt="brandLogo" sx={brandImageStyle} src={brandImage} />
       </Link>
       <Toolbar sx={appBarStyle}>
         {navigationItems.map((snap) => (
@@ -48,29 +46,25 @@ const Navbar = () => {
         <MenuItem>
           <AddRounded sx={iconStyle} />
         </MenuItem>
-        <Link to="/profile">
+        <Link to={`/profile/${userData.username}`}>
           <MenuItem>
             <Person sx={iconStyle} />
           </MenuItem>
         </Link>
       </Toolbar>
       <Toolbar sx={actionbarStyle}>
-        <Link to="/profile">
+        <Link to={`/profile/${userData.username}`}>
           <Box sx={userNameChipStyle}>
-            <Avatar
-              alt="ProfilePicture"
-              src={userData.profilePicture}
-              sx={dpStyle}
-            />
+            <CurrentAvatar sx={dpStyle} />
+
             <Typography variant="caption" component="span">
               @{userData.username}
             </Typography>
           </Box>
         </Link>
-        <div onClick={()=>dispatch(signOutHandler())} >
-          <Logout  />
+        <div onClick={() => dispatch(signOutHandler())}>
+          <Logout />
         </div>
-   
       </Toolbar>
     </AppBar>
   );
