@@ -30,6 +30,7 @@ export const Post = ({ postInfo }) => {
     user: { users },
   } = useSelector((state) => state);
 
+
   const postUser = getCurrentUser(users, username);
 
   const profilePicture = postUser?.profilePicture; //info of the one who posted
@@ -50,6 +51,7 @@ export const Post = ({ postInfo }) => {
         </Stack>
 
         <MorePostMenu postInfo={postInfo} />
+        
       </Stack>
       <Link to={`/post/${_id}`}>
         <Container>
