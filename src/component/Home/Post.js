@@ -21,12 +21,12 @@ import {
   Container,
 } from "@mui/material";
 import { blue, grey } from "@mui/material/colors";
+
 import { HomePageStyles } from "../../styles/HomePageStyle";
 import { getCurrentUser } from "../../utils";
-import { followUser, unfollowUser } from "../../helper/user";
 import { CreatePostModal } from "./CreatePostModal";
 import { setPostContent } from "../../features/post/postSlice";
-import { deletePost, dislikePost, likePost } from "../../helper/post";
+import { followUser, unfollowUser , deletePost, dislikePost, likePost , unsavePost, bookmarkPost } from "../../helper";
 
 export const Post = ({
   postInfo = {
@@ -53,6 +53,7 @@ export const Post = ({
   const {
     auth: { userData, token },
     user: { users },
+    bookmark: { bookmarkedPost },
   } = useSelector((state) => state);
   const dispatch = useDispatch();
 
@@ -80,11 +81,20 @@ export const Post = ({
     likedBy.find(
       (userWhoLiked) => userWhoLiked?.userName === userData?.userName
     );
+  const isBookmarked = () =>
+    bookmarkedPost.find((bookmarkedId) => bookmarkedId === _id);
 
   const handleLikeDislike = () =>
     IsLiked()
       ? dispatch(dislikePost({ postId: _id, token }))
       : dispatch(likePost({ postId: _id, token }));
+
+console.log(bookmarkedPost)
+
+  const handleBookmarkingOfPost = () =>
+    isBookmarked()
+      ? dispatch(unsavePost({ postId: _id, token }))
+      : dispatch(bookmarkPost({ postId: _id, token }));
 
   const postUser = getCurrentUser(users, username);
 
@@ -183,7 +193,13 @@ export const Post = ({
           {" "}
           <ModeComment /> Comment
         </Button>
-        <Button sx={PostActionButtonStyles}>
+        <Button
+          onClick={handleBookmarkingOfPost}
+          sx={{
+            ...PostActionButtonStyles,
+            color: isBookmarked() ? blue[600] : grey[600],
+          }}
+        >
           {" "}
           <Bookmark /> Save
         </Button>
