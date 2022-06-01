@@ -1,40 +1,24 @@
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
-import {
-  Bookmark,
-  ModeComment,
-  MoreHoriz,
-  ThumbUpAlt,
-} from "@mui/icons-material";
+import { Bookmark, ModeComment, ThumbUpAlt } from "@mui/icons-material";
 import {
   Avatar,
   Button,
   Divider,
-  Menu,
-  MenuItem,
   Paper,
   Stack,
   Typography,
-  Box,
   Container,
 } from "@mui/material";
 import { blue, grey } from "@mui/material/colors";
 
 import { HomePageStyles } from "../../styles/HomePageStyle";
 import { getCurrentUser } from "../../utils";
-import { CreatePostModal } from "./CreatePostModal";
-import { setPostContent } from "../../features/post/postSlice";
-import { followUser, unfollowUser , deletePost, dislikePost, likePost , unsavePost, bookmarkPost } from "../../helper";
+import { dislikePost, likePost, unsavePost, bookmarkPost } from "../../helper";
+import { MorePostMenu } from "./MorePostMenu";
 
-export const Post = ({
-  postInfo = {
-    content: "lorem is",
-    username: "slayer",
-    updatedAt: "22-01-2002",
-  },
-}) => {
+export const Post = ({ postInfo }) => {
   const {
     PostContainerStyle,
     PostActionButtonStyles,
@@ -57,26 +41,6 @@ export const Post = ({
   } = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  const [localActions, setLocalActions] = useState({
-    isEditModalOpen: false,
-  });
-  const [menuAnchorElement, setMenuAnchorElement] = useState(null);
-
-  const isMenuOpen = Boolean(menuAnchorElement);
-
-  const handleMenuClick = (event) => setMenuAnchorElement(event.currentTarget);
-
-  const handleMenuClose = () => setMenuAnchorElement(null);
-
-  const handleOpenEditPostModal = () => {
-    setLocalActions((prev) => ({
-      ...prev,
-      isEditModalOpen: true,
-    }));
-    dispatch(setPostContent(postInfo?.content));
-    handleMenuClose();
-  };
-
   const IsLiked = () =>
     likedBy.find(
       (userWhoLiked) => userWhoLiked?.userName === userData?.userName
@@ -89,8 +53,6 @@ export const Post = ({
       ? dispatch(dislikePost({ postId: _id, token }))
       : dispatch(likePost({ postId: _id, token }));
 
-console.log(bookmarkedPost)
-
   const handleBookmarkingOfPost = () =>
     isBookmarked()
       ? dispatch(unsavePost({ postId: _id, token }))
@@ -99,8 +61,6 @@ console.log(bookmarkedPost)
   const postUser = getCurrentUser(users, username);
 
   const profilePicture = postUser?.profilePicture; //info of the one who posted
-  const postUserid = postUser?._id; //info of the one who posted
-  const following = getCurrentUser(users, userData?.username)?.following; //info of logged in user
 
   return (
     <Paper sx={PostContainerStyle}>
@@ -116,56 +76,10 @@ console.log(bookmarkedPost)
             {moment(updatedAt).fromNow()}
           </Typography>
         </Stack>
-        <Box sx={{ color: isMenuOpen ? grey[700] : grey[400], ml: "auto" }}>
-          <MoreHoriz onClick={handleMenuClick} />
-          <CreatePostModal
-            isOpen={localActions?.isEditModalOpen}
-            handleClose={() =>
-              setLocalActions((prev) => ({
-                ...prev,
-                isEditModalOpen: !prev?.isEditModalOpen,
-              }))
-            }
-            isEdit={localActions?.isEditModalOpen}
-            currentPost={postInfo}
-          />
-          <Menu
-            anchorEl={menuAnchorElement}
-            open={isMenuOpen}
-            onClose={handleMenuClose}
-          >
-            {username === userData?.username ? (
-              <div>
-                <MenuItem onClick={handleOpenEditPostModal}>Edit</MenuItem>
-                <MenuItem
-                  onClick={() => dispatch(deletePost({ postId: _id, token }))}
-                >
-                  Delete
-                </MenuItem>
-              </div>
-            ) : following.find(
-                (eachUser) => eachUser?.username === username
-              ) ? (
-              <MenuItem
-                onClick={() =>
-                  dispatch(unfollowUser({ unfollowerId: postUserid, token }))
-                }
-              >
-                Unfollow
-              </MenuItem>
-            ) : (
-              <MenuItem
-                onClick={() =>
-                  dispatch(followUser({ followerId: postUserid, token }))
-                }
-              >
-                Follow
-              </MenuItem>
-            )}
-          </Menu>
-        </Box>
+
+        <MorePostMenu postInfo={postInfo} />
       </Stack>
-      {/* <Divider sx={PostDividerStyle} /> */}
+
       <Container>
         <Typography
           mb={3}
