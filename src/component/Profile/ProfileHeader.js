@@ -23,6 +23,7 @@ export const ProfileHeader = ({ currUser }) => {
   const {
     auth: { userData, token },
     user: { users },
+    post:{allPosts}
   } = useSelector((state) => state);
   const [actions, setActions] = useState({
     editOpen: false,
@@ -45,7 +46,9 @@ export const ProfileHeader = ({ currUser }) => {
 
   const handleUnfollowUser = () =>
     dispatch(unfollowUser({ unfollowerId: currUser._id, token }));
-
+    const numberOfPosts = allPosts.filter(
+      (eachPost) => eachPost.username === currUser?.username
+    ).length;
   return (
     <Paper sx={{ p: 2 }}>
       <Box
@@ -129,7 +132,7 @@ export const ProfileHeader = ({ currUser }) => {
         >
           <Stack>
             Posts
-            <span>{0}</span>
+            <span>{numberOfPosts}</span>
           </Stack>
           <Divider orientation="vertical" flexItem />
           <FollowerModal
