@@ -27,14 +27,7 @@ export const userSlice = createSlice({
         return user;
       });
     },
-    [unfollowUser.pending]: (state, { payload }) => {
-      console.log("pending",payload)
-      
-    },
-    [unfollowUser.reject]: (state, { payload }) => {
-      console.log("reject",payload)
-      
-    },
+  
     [unfollowUser.fulfilled]: (state, { payload }) => {
       state.users = state.users.map((user) => {
         if (user.username === payload.followUser.username)
