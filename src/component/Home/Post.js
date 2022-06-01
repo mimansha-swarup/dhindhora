@@ -20,13 +20,13 @@ import {
   Box,
   Container,
 } from "@mui/material";
-import { grey } from "@mui/material/colors";
+import { blue, grey } from "@mui/material/colors";
 import { HomePageStyles } from "../../styles/HomePageStyle";
 import { getCurrentUser } from "../../utils";
 import { followUser, unfollowUser } from "../../helper/user";
-import { deletePost } from "../../helper/post";
 import { CreatePostModal } from "./CreatePostModal";
 import { setPostContent } from "../../features/post/postSlice";
+import { deletePost, dislikePost, likePost } from "../../helper/post";
 
 export const Post = ({
   postInfo = {
@@ -42,7 +42,13 @@ export const Post = ({
     PostDividerStyle,
   } = HomePageStyles;
 
-  const { _id = "", content, username, updatedAt } = postInfo;
+  const {
+    _id = "",
+    content,
+    username,
+    updatedAt,
+    likes: { likedBy, likeCount },
+  } = postInfo;
 
   const {
     auth: { userData, token },
@@ -51,30 +57,34 @@ export const Post = ({
   const dispatch = useDispatch();
 
   const [localActions, setLocalActions] = useState({
-    menuAnchorElement: null,
     isEditModalOpen: false,
   });
+  const [menuAnchorElement, setMenuAnchorElement] = useState(null);
 
-  const isMenuOpen = Boolean(localActions?.menuAnchorElement);
+  const isMenuOpen = Boolean(menuAnchorElement);
 
-  const handleMenuClick = (event) => {
-    setLocalActions((prev) => ({
-      ...prev,
-      menuAnchorElement: event.currentTarget,
-    }));
-  };
-  const handleMenuClose = () => {
-    setLocalActions((prev) => ({ ...prev, menuAnchorElement: null }));
-  };
+  const handleMenuClick = (event) => setMenuAnchorElement(event.currentTarget);
 
-  const handleOpenEditPostModal = () =>{
+  const handleMenuClose = () => setMenuAnchorElement(null);
+
+  const handleOpenEditPostModal = () => {
     setLocalActions((prev) => ({
       ...prev,
       isEditModalOpen: true,
-    }))
-    dispatch(setPostContent(postInfo?.content))
-    handleMenuClose()
-  }
+    }));
+    dispatch(setPostContent(postInfo?.content));
+    handleMenuClose();
+  };
+
+  const IsLiked = () =>
+    likedBy.find(
+      (userWhoLiked) => userWhoLiked?.userName === userData?.userName
+    );
+
+  const handleLikeDislike = () =>
+    IsLiked()
+      ? dispatch(dislikePost({ postId: _id, token }))
+      : dispatch(likePost({ postId: _id, token }));
 
   const postUser = getCurrentUser(users, username);
 
@@ -110,16 +120,13 @@ export const Post = ({
             currentPost={postInfo}
           />
           <Menu
-            anchorEl={localActions?.menuAnchorElement}
+            anchorEl={menuAnchorElement}
             open={isMenuOpen}
             onClose={handleMenuClose}
-           
           >
             {username === userData?.username ? (
               <div>
-                <MenuItem
-                onClick={handleOpenEditPostModal}
-                >Edit</MenuItem>
+                <MenuItem onClick={handleOpenEditPostModal}>Edit</MenuItem>
                 <MenuItem
                   onClick={() => dispatch(deletePost({ postId: _id, token }))}
                 >
@@ -148,23 +155,29 @@ export const Post = ({
           </Menu>
         </Box>
       </Stack>
-      <Divider sx={PostDividerStyle} />
+      {/* <Divider sx={PostDividerStyle} /> */}
       <Container>
         <Typography
-          my={2}
+          mb={3}
           variant="body1"
           component="p"
           textAlign="start"
-          color={"grey[200]"}
+          color={grey[700]}
         >
           {content}
         </Typography>
       </Container>
       <Divider sx={PostDividerStyle} />
       <Stack flexDirection="row" justifyContent="stretch" p={1} gap={3}>
-        <Button sx={PostActionButtonStyles}>
+        <Button
+          onClick={handleLikeDislike}
+          sx={{
+            ...PostActionButtonStyles,
+            color: IsLiked() ? blue[600] : grey[600],
+          }}
+        >
           {" "}
-          <ThumbUpAlt /> Like
+          <ThumbUpAlt /> {likeCount >= 1 ? likeCount : "Like"}
         </Button>
         <Button sx={PostActionButtonStyles}>
           {" "}
