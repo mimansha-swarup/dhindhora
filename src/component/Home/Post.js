@@ -41,6 +41,7 @@ export const Post = ({ postInfo }) => {
   } = useSelector((state) => state);
   const dispatch = useDispatch();
 
+
   const IsLiked = () =>
     likedBy.find(
       (userWhoLiked) => userWhoLiked?.userName === userData?.userName
@@ -57,6 +58,7 @@ export const Post = ({ postInfo }) => {
     isBookmarked()
       ? dispatch(unsavePost({ postId: _id, token }))
       : dispatch(bookmarkPost({ postId: _id, token }));
+
 
   const postUser = getCurrentUser(users, username);
 
@@ -78,6 +80,7 @@ export const Post = ({ postInfo }) => {
         </Stack>
 
         <MorePostMenu postInfo={postInfo} />
+        
       </Stack>
 
       <Container>
