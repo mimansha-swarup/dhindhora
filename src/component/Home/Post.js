@@ -51,30 +51,24 @@ export const Post = ({
   const dispatch = useDispatch();
 
   const [localActions, setLocalActions] = useState({
-    menuAnchorElement: null,
     isEditModalOpen: false,
   });
+  const [menuAnchorElement, setMenuAnchorElement] = useState(null);
 
-  const isMenuOpen = Boolean(localActions?.menuAnchorElement);
+  const isMenuOpen = Boolean(menuAnchorElement);
 
-  const handleMenuClick = (event) => {
-    setLocalActions((prev) => ({
-      ...prev,
-      menuAnchorElement: event.currentTarget,
-    }));
-  };
-  const handleMenuClose = () => {
-    setLocalActions((prev) => ({ ...prev, menuAnchorElement: null }));
-  };
+  const handleMenuClick = (event) => setMenuAnchorElement(event.currentTarget);
 
-  const handleOpenEditPostModal = () =>{
+  const handleMenuClose = () => setMenuAnchorElement(null);
+
+  const handleOpenEditPostModal = () => {
     setLocalActions((prev) => ({
       ...prev,
       isEditModalOpen: true,
-    }))
-    dispatch(setPostContent(postInfo?.content))
-    handleMenuClose()
-  }
+    }));
+    dispatch(setPostContent(postInfo?.content));
+    handleMenuClose();
+  };
 
   const postUser = getCurrentUser(users, username);
 
@@ -110,16 +104,13 @@ export const Post = ({
             currentPost={postInfo}
           />
           <Menu
-            anchorEl={localActions?.menuAnchorElement}
+            anchorEl={menuAnchorElement}
             open={isMenuOpen}
             onClose={handleMenuClose}
-           
           >
             {username === userData?.username ? (
               <div>
-                <MenuItem
-                onClick={handleOpenEditPostModal}
-                >Edit</MenuItem>
+                <MenuItem onClick={handleOpenEditPostModal}>Edit</MenuItem>
                 <MenuItem
                   onClick={() => dispatch(deletePost({ postId: _id, token }))}
                 >
