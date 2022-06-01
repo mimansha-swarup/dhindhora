@@ -1,5 +1,5 @@
-export { PostActionBar } from "./Home/PostActionBar";
 export { CurrentAvatar } from "./Home/CurrentAvatar";
+
 export { ProfileHeader } from "./Profile/ProfileHeader";
 export { Post } from "./Home/Post";
 export { HomeLayout } from "./Home/HomeLayout";

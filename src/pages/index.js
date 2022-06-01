@@ -1,4 +1,3 @@
-export { PostPage } from "./PostPage"
 export { ProfilePage } from "./ProfilePage"
 export { ExplorePage } from "./ExplorePage"
 export { BookmarkPage } from "./BookmarkPage"

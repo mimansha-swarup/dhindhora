@@ -5,7 +5,6 @@ import {
   ExplorePage,
   HomePage,
   LoginPage,
-  PostPage,
   ProfilePage,
 } from "../pages";
 import { RequiresAuth } from "./requiresAuth";
@@ -21,7 +20,6 @@ export const AllRoutes = () => {
         <Route path="/bookmark" element={<BookmarkPage />} />
         <Route path="/explore" element={<ExplorePage />} />
         <Route path="/profile/:username" element={<ProfilePage />} />
-        <Route path="/post/:postId" element={<PostPage />} />
       </Route>
       {token ? (
         <Route path="/login" element={<Navigate to="/" replace />} />
