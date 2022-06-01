@@ -115,7 +115,7 @@ export const Post = ({ postInfo }) => {
           }}
         >
           {" "}
-          <Bookmark /> Save
+          <Bookmark /> {isBookmarked() ? "Unsave" : "Save"}
         </Button>
       </Stack>
     </Paper>
