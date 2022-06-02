@@ -7,14 +7,17 @@ import {
   MenuItem,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AddRounded, Logout, Person } from "@mui/icons-material";
+import { blue,  grey } from "@mui/material/colors";
+import { useState } from "react";
 
 import { brandImage } from "../../assets";
 import { navigationItems } from "../../utils/navigationActions";
 import { NavStyles } from "../../styles/NavbarStyle";
 import { signOutHandler } from "../../features/auth/authSlice";
 import { CurrentAvatar } from "../Home/CurrentAvatar";
+import { CreatePostModal } from "../Home/CreatePostModal";
 const Navbar = () => {
   const {
     brandImageStyle,
@@ -25,6 +28,14 @@ const Navbar = () => {
     actionbarStyle,
     userNameChipStyle,
   } = NavStyles;
+
+  const activeStyle = {
+    color: blue[800],
+  };
+
+  const [isAddPostModal, setIsAddPostModal] = useState(false);
+  const openModal = () => setIsAddPostModal(true); 
+  const closeModal = () => setIsAddPostModal(false);
 
   const {
     auth: { userData },
@@ -39,18 +50,30 @@ const Navbar = () => {
       </Link>
       <Toolbar sx={appBarStyle}>
         {navigationItems.map((snap) => (
-          <Link key={snap.id} to={snap.link}>
+          <NavLink
+            key={snap.id}
+            to={snap.link}
+            style={({ isActive }) =>
+              isActive ? activeStyle : { color: grey[500] }
+            }
+          >
             <MenuItem>{snap.icon}</MenuItem>
-          </Link>
+          </NavLink>
         ))}
-        <MenuItem>
+        <CreatePostModal isOpen={isAddPostModal} handleClose={closeModal} />
+        <MenuItem onClick={openModal} >
           <AddRounded sx={iconStyle} />
         </MenuItem>
-        <Link to={`/profile/${userData.username}`}>
+        <NavLink
+          to={`/profile/${userData.username}`}
+          style={({ isActive }) =>
+            isActive ? activeStyle : { color: grey[500] }
+          }
+        >
           <MenuItem>
-            <Person sx={iconStyle} />
+            <Person />
           </MenuItem>
-        </Link>
+        </NavLink>
       </Toolbar>
       <Toolbar sx={actionbarStyle}>
         <Link to={`/profile/${userData.username}`}>
