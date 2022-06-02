@@ -5,12 +5,16 @@ import {
   MenuList,
   Chip,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { blue, blueGrey, grey } from "@mui/material/colors";
+import {  AddBox } from "@mui/icons-material";
+import { useState } from "react";
 
 import { navigationItems } from "../../utils/navigationActions";
 import { SideBarStyles } from "../../styles/SideBarListStyle";
 import { CurrentAvatar } from "../Home/CurrentAvatar";
+import { CreatePostModal } from "../Home/CreatePostModal";
 
 export const Sidebar = () => {
   const {
@@ -19,6 +23,15 @@ export const Sidebar = () => {
     NavigationLinksStyle,
     ProfileTileStyle,
   } = SideBarStyles;
+
+  const activeStyle = {
+    color: blue[600],
+    borderLeft: `2px solid ${blueGrey[300]}`,
+  };
+
+  const [isAddPostModal, setIsAddPostModal] = useState(false);
+  const openModal = () =>{ setIsAddPostModal(true); console.log("hello")}
+  const closeModal = () => setIsAddPostModal(false);
 
   const {
     auth: { userData },
@@ -29,19 +42,34 @@ export const Sidebar = () => {
         <MenuItem sx={ProfileTileStyle}>
           <CurrentAvatar />
 
-          <ListItemText sx={{display:"flex",}} >
+          <ListItemText sx={{ display: "flex" }}>
             <Chip sx={UsernameChipStyle} label={userData.username} />
           </ListItemText>
         </MenuItem>
       </Link>
       {navigationItems.map((snap) => (
-        <Link key={snap.id} to={snap.link}>
+        <NavLink
+          style={({ isActive }) => (isActive ? activeStyle : null)}
+          key={snap.id}
+          to={snap.link}
+        >
           <MenuItem sx={NavigationLinksStyle}>
-            <ListItemIcon>{snap.icon}</ListItemIcon>
-            <ListItemText sx={{ textAlign: "start" }}>{snap.text}</ListItemText>
+            <ListItemIcon sx={{ color: "inherit" }}>{snap.icon}</ListItemIcon>
+            <ListItemText sx={{ textAlign: "start", color: grey[800] }}>
+              {snap.text}
+            </ListItemText>
           </MenuItem>
-        </Link>
+        </NavLink>
       ))}
+      <CreatePostModal isOpen={isAddPostModal} handleClose={closeModal} />
+      <MenuItem sx={NavigationLinksStyle} onClick={()=>openModal()}>
+        <ListItemIcon sx={{ color: "inherit" }}>
+          {<AddBox sx={{ fontSize: { xs: "x-large", sm: "xx-large" } }} />}
+        </ListItemIcon>
+        <ListItemText sx={{ textAlign: "start", color: grey[800] }}>
+          Post
+        </ListItemText>
+      </MenuItem>
     </MenuList>
   );
 };
