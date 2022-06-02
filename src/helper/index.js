@@ -9,16 +9,20 @@ import {
   dislikePost,
   getAllPosts,
 } from "./post";
+import { addComment } from "./post/addComent";
+import { deleteComment } from "./post/deleteComment";
+import { editComment } from "./post/editComment";
 import { getAllUsers, followUser, unfollowUser, editUser } from "./user";
-
 export {
   editPost,
   likePost,
   sendPost,
   editUser,
+  addComment,
   unsavePost,
   deletePost,
   followUser,
+  editComment,
   dislikePost,
   getAllPosts,
   getAllUsers,
@@ -26,4 +30,5 @@ export {
   bookmarkPost,
   loginHandler,
   signUpHandler,
+  deleteComment,
 };

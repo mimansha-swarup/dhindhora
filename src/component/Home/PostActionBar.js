@@ -5,15 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { bookmarkPost, dislikePost, likePost, unsavePost } from "../../helper";
 
 import { HomePageStyles } from "../../styles/HomePageStyle";
+import { Link } from "react-router-dom";
 
 export const PostActionBar = ({ postInfo }) => {
   const { PostActionButtonStyles } = HomePageStyles;
 
   const {
     _id = "",
-    likes: { likedBy, likeCount },
+    likes: { likedBy, likeCount },comments
   } = postInfo;
-
 
   const {
     auth: { userData, token },
@@ -38,8 +38,6 @@ export const PostActionBar = ({ postInfo }) => {
       ? dispatch(unsavePost({ postId: _id, token }))
       : dispatch(bookmarkPost({ postId: _id, token }));
 
-
-
   return (
     <Stack flexDirection="row" justifyContent="stretch" p={1} gap={3}>
       <Button
@@ -52,10 +50,12 @@ export const PostActionBar = ({ postInfo }) => {
         {" "}
         <ThumbUpAlt /> {likeCount >= 1 ? likeCount : "Like"}
       </Button>
-      <Button sx={PostActionButtonStyles}>
-        {" "}
-        <ModeComment /> Comment
-      </Button>
+      <Link to={`/post/${_id}`}>
+        <Button sx={PostActionButtonStyles}>
+          {" "}
+          <ModeComment /> { comments.length>=1?comments.length:"Comment"}
+        </Button>
+      </Link>
       <Button
         onClick={handleBookmarkingOfPost}
         sx={{

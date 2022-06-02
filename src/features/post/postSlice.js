@@ -1,16 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  addComment,
   deletePost,
   dislikePost,
   editPost,
   getAllPosts,
+  editComment,
   likePost,
   sendPost,
-} from "../../helper/post";
+  deleteComment,
+} from "../../helper";
 
 const initialState = {
   allPosts: [],
   postContent: "",
+  editCommentId:""
 };
 
 const postSlice = createSlice({
@@ -22,6 +26,12 @@ const postSlice = createSlice({
     },
     clearPostContent: (state, { payload }) => {
       state.postContent = "";
+    },
+    setEditComment: (state, { payload }) => {
+      state.editCommentId = payload;
+    },
+    resetEditComment: (state, { payload }) => {
+      state.editCommentId = "";
     },
   },
   extraReducers: {
@@ -43,9 +53,19 @@ const postSlice = createSlice({
     [dislikePost.fulfilled]: (state, { payload }) => {
       state.allPosts = payload;
     },
+    [addComment.fulfilled]: (state, { payload }) => {
+      state.allPosts = payload;
+    },
+    [editComment.fulfilled]: (state, { payload }) => {
+      state.allPosts = payload;
+    },
+    [deleteComment.fulfilled]: (state, { payload }) => {
+      state.allPosts = payload;
+    },
+
   },
 });
 
-export const { setPostContent, clearPostContent } = postSlice.actions;
+export const { setPostContent, clearPostContent , setEditComment,resetEditComment} = postSlice.actions;
 
 export default postSlice.reducer;

@@ -1,3 +1,6 @@
+export { MorePostMenu } from "./Home/MorePostMenu";
+export { CommentBox } from "./Home/CommentBox";
+export { MoreCommentMenu } from "./Home/MoreCommentMenu";
 export { PostActionBar } from "./Home/PostActionBar";
 export { CurrentAvatar } from "./Home/CurrentAvatar";
 export { ProfileHeader } from "./Profile/ProfileHeader";

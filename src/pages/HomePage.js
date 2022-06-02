@@ -7,7 +7,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AddPost, HomeLayout, Post } from "../component";
@@ -20,21 +20,40 @@ export const HomePage = () => {
   const {
     auth: { token, userData },
     post: { allPosts },
-    user:{users}
+    user: { users },
   } = useSelector((state) => state);
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (token) dispatch(getAllPosts());
   }, [dispatch, token]);
 
+  const [sortOrder, setSortOrder] = useState("recent");
+
+  const handleSelectMenuClick = (event) => setSortOrder(event.target.value);
+
   const userFeeds = allPosts.filter((post) => {
     return (
       post.username === userData.username ||
-      getCurrentUser(users,post?.username)?.followers?.find(
+      getCurrentUser(users, post?.username)?.followers?.find(
         (user) => user.username === userData.username
       )
     );
   });
+  
+  const sortPost = () => {
+    const feed = [...userFeeds]; // to make sure we dont mess orignal user feed
+    if (sortOrder === "recent")
+      feed.sort((a, b) => new Date(b?.createdAt) - new Date(a?.createdAt));
+    if (sortOrder === "oldest")
+      feed.sort((a, b) => new Date(a?.createdAt) - new Date(b?.createdAt));
+    if (sortOrder === "top")
+      feed.sort(
+        (a, b) => new Date(b?.likes.likeCount) - new Date(a?.likes.likeCount)
+      );
+    return feed;
+  };
 
   return (
     <HomeLayout>
@@ -54,19 +73,21 @@ export const HomePage = () => {
             <InputLabel sx={SortLabelStyle}>sort by</InputLabel>
             <FormControl size="small">
               <Select
-                value="top"
+                value={sortOrder}
                 disableUnderline
                 sx={SortSelcetStyle}
                 variant="standard"
+                onChange={handleSelectMenuClick}
               >
                 <MenuItem value="top">Top</MenuItem>
                 <MenuItem value="recent">Recent</MenuItem>
+                <MenuItem value="oldest">Oldest</MenuItem>
               </Select>
             </FormControl>
           </Stack>
         </Divider>
       </Stack>
-      {userFeeds.map((eachPost) => (
+      {sortPost().map((eachPost) => (
         <Post key={eachPost._id} postInfo={eachPost} />
       ))}
     </HomeLayout>
