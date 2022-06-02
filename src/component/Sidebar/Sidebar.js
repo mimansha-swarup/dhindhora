@@ -30,7 +30,7 @@ export const Sidebar = () => {
   };
 
   const [isAddPostModal, setIsAddPostModal] = useState(false);
-  const openModal = () =>{ setIsAddPostModal(true); console.log("hello")}
+  const openModal = () => setIsAddPostModal(true); 
   const closeModal = () => setIsAddPostModal(false);
 
   const {
