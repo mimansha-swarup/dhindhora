@@ -21,29 +21,31 @@ export const posts = [
     updatedAt: formatDate(),
     comments: [
       // TODO: commenting out for future refference
-      // {
-      //   _id: uuid(),
-      //   username: "shubhamsoni",
-      //   text: "Interesting",
-      //   votes: {
-      //     upvotedBy: [],
-      //     downvotedBy: [],
-      //   },
-      // },
     ],
   },
   {
     _id: uuid(),
     content:
-      "People’s lives don’t end when they die, it ends when they lose faith.",
+    "People’s lives don’t end when they die, it ends when they lose faith.",
     likes: {
       likeCount: 0,
       likedBy: [],
       dislikedBy: [],
     },
     username: "slayer",
+    
+    comments: [
+      {
+        _id: uuid(),
+        username: "raccoon",
+        content: "Interesting",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+      },
 
-    comments: [],
+    ],
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
