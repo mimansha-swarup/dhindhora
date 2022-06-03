@@ -15,7 +15,6 @@ import {
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import moment from "moment";
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 
@@ -34,8 +33,6 @@ export const PostPage = () => {
     HomePageStyles;
 
   const { postId } = useParams();
-  const [inputData, setInputData] = useState("");
-  const [inputEditData, setInputEditData] = useState("");
 
   const {
     post: { allPosts, editCommentId },
@@ -87,18 +84,15 @@ export const PostPage = () => {
         <CommentBox
           isEdit={false}
           postId={postId}
-          inputData={inputData}
-          setInputData={setInputData}
         />
         <List>
           {[...comments].reverse().map((commentData) =>
             editCommentId === commentData._id ? (
               <CommentBox
+              key={commentData._id }
                 postId={postId}
                 isEdit={true}
                 commentData={commentData}
-                inputData={inputEditData}
-                setInputData={setInputEditData}
               />
             ) : (
               <Stack key={commentData._id} px={2} my={3} position="relative">
@@ -122,7 +116,7 @@ export const PostPage = () => {
                       <MoreCommentMenu
                         postId={postId}
                         commentInfo={commentData}
-                        setInputData={setInputEditData}
+                        // setInputData={setInputEditData}
                       />
                     )}
                   </ListItemIcon>

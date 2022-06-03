@@ -7,7 +7,7 @@ import { setEditComment } from "../../features/post/postSlice";
 import {  deleteComment } from "../../helper";
 
 
-export const MoreCommentMenu = ({ commentInfo,postId,setInputData }) => {
+export const MoreCommentMenu = ({ commentInfo,postId }) => {
   const { _id = "" } = commentInfo;
 
   const {
@@ -33,7 +33,7 @@ export const MoreCommentMenu = ({ commentInfo,postId,setInputData }) => {
         open={isMenuOpen}
         onClose={handleMenuClose}
       >
-        <MenuItem onClick={()=>{dispatch(setEditComment(_id)); setInputData(commentInfo?.content)}}>Edit</MenuItem>
+        <MenuItem onClick={()=>{dispatch(setEditComment(_id))}}>Edit</MenuItem>
         <MenuItem onClick={() => dispatch(deleteComment({ commentId: _id, postId,token }))}>
           Delete
         </MenuItem>

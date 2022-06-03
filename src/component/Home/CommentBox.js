@@ -4,8 +4,9 @@ import { CurrentAvatar } from "./CurrentAvatar";
 import { useDispatch, useSelector } from "react-redux";
 import { addComment, editComment } from "../../helper";
 import { resetEditComment } from "../../features/post/postSlice";
+import { useEffect, useState } from "react";
 
-export const CommentBox = ({ isEdit = false, commentData, postId,inputData, setInputData }) => {
+export const CommentBox = ({ isEdit = false, commentData, postId}) => {
   const commentFieldStyle = {
     ".MuiInputBase-input": {
       padding: ".5rem 1rem",
@@ -14,7 +15,12 @@ export const CommentBox = ({ isEdit = false, commentData, postId,inputData, setI
     },
   };
 
+  const [inputData, setInputData] = useState("");
 
+  useEffect(()=>{
+    if(isEdit)
+    setInputData(commentData?.content)
+  },[commentData?.content, isEdit])
 
   const {
     auth: { token },
