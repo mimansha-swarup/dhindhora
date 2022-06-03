@@ -1,11 +1,10 @@
 export const SuggestionCardStyles = {
-  SuggestionContainerStyle: (theme) => ({
+  SuggestionContainerStyle:{
     p: 2,
     borderRadius: 3,
     display: { lg: "flex", sm: "none", xs: "none" },
     flexDirection: "column",
- 
-  }),
+  },
 
   ListStyle: {
     display: "flex",

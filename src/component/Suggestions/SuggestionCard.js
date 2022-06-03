@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 import { followUser } from "../../helper/user";
 import { SuggestionCardStyles } from "../../styles/SuggestionCardStyles";
 
-export const SuggestionCard = () => {
+export const SuggestionCard = ({ sx = {}, isSmall = false }) => {
   const { SuggestionContainerStyle, ListStyle, ListTileStyle } =
     SuggestionCardStyles;
   const {
@@ -36,9 +36,10 @@ export const SuggestionCard = () => {
         )
     )
     .slice(0, 5);
-
+  let style = SuggestionContainerStyle;
+  if (isSmall) style = sx;
   return (
-    <Box sx={SuggestionContainerStyle}>
+    <Box sx={style}>
       <Typography
         variant="subtitle1"
         textAlign="start"
@@ -55,8 +56,12 @@ export const SuggestionCard = () => {
                 style={{ width: "100%", display: "flex" }}
                 to={`/profile/${username}`}
               >
-                <ListItemAvatar sx={{display:"flex"}} >
-                  <Avatar alt={firstName} sx={{my:"auto"}} src={profilePicture} />
+                <ListItemAvatar sx={{ display: "flex" }}>
+                  <Avatar
+                    alt={firstName}
+                    sx={{ my: "auto" }}
+                    src={profilePicture}
+                  />
                 </ListItemAvatar>
                 <ListItemText
                   primary={`${firstName} ${lastName}`}
