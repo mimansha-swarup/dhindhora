@@ -1,4 +1,5 @@
 import {
+  Box,
   Divider,
   FormControl,
   InputLabel,
@@ -10,7 +11,7 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { AddPost, HomeLayout, Post } from "../component";
+import { AddPost, HomeLayout, Post, SuggestionCard } from "../component";
 import { getAllPosts } from "../helper/post";
 import { HomePageStyles } from "../styles/HomePageStyle";
 import { getCurrentUser } from "../utils";
@@ -41,7 +42,7 @@ export const HomePage = () => {
       )
     );
   });
-  
+
   const sortPost = () => {
     const feed = [...userFeeds]; // to make sure we dont mess orignal user feed
     if (sortOrder === "recent")
@@ -87,9 +88,31 @@ export const HomePage = () => {
           </Stack>
         </Divider>
       </Stack>
-      {sortPost().map((eachPost) => (
-        <Post key={eachPost._id} postInfo={eachPost} />
-      ))}
+      {sortPost().length >= 1 ? (
+        sortPost().map((eachPost) => (
+          <Post key={eachPost._id} postInfo={eachPost} />
+        ))
+      ) : (
+        <>
+          <Typography variant="h4" component="h4" my={3}>
+            You haven't Posted yet
+          </Typography>
+          <Typography variant="subtitle1" component="p">
+            start Posting
+          </Typography>
+          <Box sx={{ display: {sm:"block",lg:"none"} ,width:{xs:"100%",sm:"80%"}, mx:"auto" }}>
+            <SuggestionCard
+            isSmall={true}
+              sx={{
+                p: 2,
+                borderRadius: 3,
+                display: "flex",
+                flexDirection: "column",
+              }}
+            />
+          </Box>
+        </>
+      )}
     </HomeLayout>
   );
 };
