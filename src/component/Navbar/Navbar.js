@@ -81,13 +81,13 @@ const Navbar = () => {
             <CurrentAvatar sx={dpStyle} />
 
             <Typography variant="caption" component="span">
-              @{userData.username}
+              {userData.username}
             </Typography>
           </Box>
         </Link>
-        <div onClick={() => dispatch(signOutHandler())}>
-          <Logout />
-        </div>
+        
+          <Logout sx={{ml:1,cursor:"pointer"}} onClick={() => dispatch(signOutHandler())} />
+        
       </Toolbar>
     </AppBar>
   );

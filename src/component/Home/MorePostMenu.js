@@ -50,8 +50,8 @@ export const MorePostMenu = ({postInfo}) => {
   const following = getCurrentUser(users, userData?.username)?.following; //info of logged in user
 
   return (
-    <Box sx={{ color: isMenuOpen ? grey[700] : grey[400], ml: "auto" }}>
-    <MoreHoriz onClick={handleMenuClick} />
+    <Box sx={{ color: isMenuOpen ? grey[700] : grey[400], ml: "auto" ,cursor:"pointer"}}>
+    <MoreHoriz  onClick={handleMenuClick} />
     <CreatePostModal
       isOpen={localActions?.isEditModalOpen}
       handleClose={() =>

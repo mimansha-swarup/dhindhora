@@ -39,7 +39,7 @@ export const SuggestionCard = ({ sx = {}, isSmall = false }) => {
   let style = SuggestionContainerStyle;
   if (isSmall) style = sx;
   return (
-    <Box sx={style}>
+    <Box sx={{...style,position:"sticky",top:"7rem"}}>
       <Typography
         variant="subtitle1"
         textAlign="start"

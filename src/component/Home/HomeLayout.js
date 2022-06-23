@@ -12,7 +12,7 @@ export const HomeLayout = ({children}) => {
     <Navbar />
     <Box sx={contentContainerStyle}>
       <Grid container spacing={2}>
-        <Grid item sm={3} lg={2} xs={0}>
+        <Grid sx={{position:"relative"}} item sm={3} lg={2} xs={0}>
           <Sidebar />
         </Grid>
         <Grid item  sm={9} lg={7} xs={12}>

@@ -25,7 +25,7 @@ export const MoreCommentMenu = ({ commentInfo,postId }) => {
   const handleMenuClose = () => setMenuAnchorElement(null);
 
   return (
-    <Box sx={{ color: isMenuOpen ? grey[700] : grey[400], ml: "auto" }}>
+    <Box sx={{ color: isMenuOpen ? grey[700] : grey[400], ml: "auto",cursor:"pointer" }}>
       <MoreHoriz onClick={handleMenuClick} />
       {/* Todo: edit post Container */}
       <Menu

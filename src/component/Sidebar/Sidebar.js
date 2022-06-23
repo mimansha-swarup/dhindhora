@@ -4,11 +4,12 @@ import {
   MenuItem,
   MenuList,
   Chip,
+  Button,
 } from "@mui/material";
 import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { blue, blueGrey, grey } from "@mui/material/colors";
-import {  AddBox } from "@mui/icons-material";
+import { AddBox } from "@mui/icons-material";
 import { useState } from "react";
 
 import { navigationItems } from "../../utils/navigationActions";
@@ -30,7 +31,7 @@ export const Sidebar = () => {
   };
 
   const [isAddPostModal, setIsAddPostModal] = useState(false);
-  const openModal = () => setIsAddPostModal(true); 
+  const openModal = () => setIsAddPostModal(true);
   const closeModal = () => setIsAddPostModal(false);
 
   const {
@@ -62,13 +63,16 @@ export const Sidebar = () => {
         </NavLink>
       ))}
       <CreatePostModal isOpen={isAddPostModal} handleClose={closeModal} />
-      <MenuItem sx={NavigationLinksStyle} onClick={()=>openModal()}>
-        <ListItemIcon sx={{ color: "inherit" }}>
-          {<AddBox sx={{ fontSize: { xs: "x-large", sm: "xx-large" } }} />}
-        </ListItemIcon>
-        <ListItemText sx={{ textAlign: "start", color: grey[800] }}>
+      <MenuItem sx={NavigationLinksStyle} onClick={() => openModal()}>
+        <Button
+          variant="outlined"
+          sx={{ width: "100%", borderWidth: 2 }}
+          startIcon={
+            <AddBox sx={{ fontSize: { xs: "x-large", sm: "xx-large" } }} />
+          }
+        >
           Post
-        </ListItemText>
+        </Button>
       </MenuItem>
     </MenuList>
   );
