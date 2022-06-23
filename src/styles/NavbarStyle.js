@@ -6,7 +6,8 @@ export const NavStyles = {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-
+    px: 5,
+    
     [theme.breakpoints.only("sm")]: {
       px: 3,
       top: 0,

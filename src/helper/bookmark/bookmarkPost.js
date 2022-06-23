@@ -13,7 +13,7 @@ export const bookmarkPost = createAsyncThunk(
           headers: { authorization: token },
         }
         );
-        console.log("work",status,data)
+ 
       if (status === 200) return data.bookmarks;
     } catch (err) {
       return rejectWithValue(err.response.data.errors[0]);

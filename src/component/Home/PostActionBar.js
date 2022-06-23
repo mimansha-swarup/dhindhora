@@ -1,4 +1,4 @@
-import { Button, Stack } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import { blue, grey } from "@mui/material/colors";
 import { Bookmark, ModeComment, ThumbUpAlt } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
@@ -48,12 +48,19 @@ export const PostActionBar = ({ postInfo }) => {
         }}
       >
         {" "}
-        <ThumbUpAlt /> {likeCount >= 1 ? likeCount : "Like"}
+
+        <ThumbUpAlt /> 
+     
+        {likeCount >= 1 ? likeCount : "Like"}
+      
       </Button>
       <Link to={`/post/${_id}`}>
         <Button sx={PostActionButtonStyles}>
-          {" "}
-          <ModeComment /> { comments.length>=1?comments.length:"Comment"}
+
+          <ModeComment /> 
+    
+          { comments.length>=1?comments.length:"Comment"}
+ 
         </Button>
       </Link>
       <Button
@@ -63,8 +70,12 @@ export const PostActionBar = ({ postInfo }) => {
           color: isBookmarked() ? blue[600] : grey[600],
         }}
       >
-        {" "}
-        <Bookmark /> {isBookmarked() ? "Unsave" : "Save"}
+
+        <Bookmark /> 
+        <Typography variant="body1" component="p" display={{xs:"none",sm:"block"}} >
+        {isBookmarked() ? "Unsave" : "Save"}
+        </Typography>
+          
       </Button>
     </Stack>
   );
