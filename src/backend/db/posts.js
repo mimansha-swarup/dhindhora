@@ -43,6 +43,8 @@ export const posts = [
           upvotedBy: [],
           downvotedBy: [],
         },
+        createdAt: formatDate(),
+        updatedAt: formatDate(),
       },
 
     ],
