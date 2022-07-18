@@ -18,6 +18,7 @@ import { NavStyles } from "../../styles/NavbarStyle";
 import { signOutHandler } from "../../features/auth/authSlice";
 import { CurrentAvatar } from "../Home/CurrentAvatar";
 import { CreatePostModal } from "../Home/CreatePostModal";
+import { SearchBar } from "./SearchBar";
 const Navbar = () => {
   const {
     brandImageStyle,
@@ -48,6 +49,7 @@ const Navbar = () => {
       <Link to="/">
         <Avatar alt="brandLogo" sx={brandImageStyle} src={brandImage} />
       </Link>
+      <SearchBar/>
       <Toolbar sx={appBarStyle}>
         {navigationItems.map((snap) => (
           <NavLink
