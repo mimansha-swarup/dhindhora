@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {   PersonOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
+import { PersonOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
 import {
   Container,
   FormControl,
@@ -22,14 +22,15 @@ import { loginHandler } from "../helper/auth";
 
 export const LoginPage = () => {
   const { palette } = useTheme();
-  const {loginContainerStyle,loginBoxStyle,loginLogoBoxStyle,paperStyle} = LoginStyles;
+  const { loginContainerStyle, loginBoxStyle, loginLogoBoxStyle, paperStyle } =
+    LoginStyles;
 
   const [loginLocalActions, setLoginLocalActions] = useState({
     showPassword: false,
     openModal: false,
   });
 
- const dispatch  = useDispatch()
+  const dispatch = useDispatch();
   const handleClickShowPassword = () =>
     setLoginLocalActions((prevState) => ({
       ...prevState,
@@ -45,14 +46,14 @@ export const LoginPage = () => {
     event.preventDefault();
     const username = event.target.username.value;
     const password = event.target.password.value;
-    dispatch(loginHandler({username,password}))
-    // event.reset();
+    dispatch(loginHandler({ username, password }));
+   
   };
-  
-  const LoginWithTestCredential = () =>{
-    
-    dispatch(loginHandler({username:"slayer",password:"clankiller123"}))
-  }
+
+  const LoginWithTestCredential = () => {
+    dispatch(loginHandler({ username: "slayer", password: "clankiller123" }));
+   
+  };
 
   return (
     <div className="login-bg">
@@ -130,11 +131,17 @@ export const LoginPage = () => {
                 </Button>
               </Stack>
             </form>
-     
-            <Button onClick={LoginWithTestCredential} size="small" variant="text" sx={{ m: 0 }} color="info">
+
+            <Button
+              onClick={LoginWithTestCredential}
+              size="small"
+              variant="text"
+              sx={{ m: 0 }}
+              color="info"
+            >
               Log in as Guest
             </Button>
-           
+
             <Divider />
             <Button
               sx={{ width: "75%", mx: "auto", my: 1, p: 1.25 }}

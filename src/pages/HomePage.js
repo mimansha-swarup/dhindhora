@@ -64,7 +64,7 @@ export const HomePage = () => {
       <AddPost />
       <Stack
         my={2}
-        gap={1}
+        gap={2}
         justifyContent="space-around"
         flexDirection="row"
         alignItems="center"

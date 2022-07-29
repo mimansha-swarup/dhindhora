@@ -8,10 +8,16 @@ body {
     background-color:#F1F2F6;
     color:#272343;
     height: 100vh;
+    
+    
     box-sizing: content-box;
-  
+    display: block;
+    
   }
-  
+  #root{
+    height: -webkit-fill-available;
+
+  }
   code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;

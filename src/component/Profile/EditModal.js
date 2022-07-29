@@ -53,9 +53,9 @@ export const EditModal = ({ currUser, open, onClose }) => {
           method: "POST",
           body: formData,
         });
-     
+
         const { url } = await response.json();
-       
+
         setProfilePictureData((prev) => ({ ...prev, url }));
         setProfilePictureData((prev) => ({ ...prev, loading: false }));
       } catch (err) {
@@ -80,6 +80,7 @@ export const EditModal = ({ currUser, open, onClose }) => {
     dispatch(editUser({ userData: { ...currUser, ...updatedData }, token }));
     onClose();
   };
+  console.log(currUser)
 
   return (
     <Modal open={open} onClose={onClose}>
@@ -131,11 +132,20 @@ export const EditModal = ({ currUser, open, onClose }) => {
             <Typography variant="body1" component="p" fontWeight={600}>
               Bio
             </Typography>
-            <TextField size="small" id="bio" />
+            <TextField size="small" id="bio"    defaultValue={currUser.bio} />
             <Typography variant="body1" component="p" fontWeight={600}>
               Website
             </Typography>
-            <TextField size="small" id="website" />
+            <TextField
+              size="small"
+              id="website"
+              defaultValue={currUser.website}
+              inputProps={{
+                pattern:
+                  "^((ftp|http|https)://)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(.[a-zA-Z]+)+((/)[w#]+)*(/w+?[a-zA-Z0-9_]+=w+(&[a-zA-Z0-9_]+=w+)*)?/?$",
+                  title:"your personal website"
+              }}
+            />
             <Button
               color="success"
               variant="contained"

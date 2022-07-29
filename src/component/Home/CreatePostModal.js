@@ -36,26 +36,28 @@ export const CreatePostModal = ({
   }, [currentPost?.content, dispatch, isEdit]);
 
   const createSendPost = () => {
-    if (isEdit)
-      dispatch(
-        editPost({
-          postData: { content: postContent },
-          token,
-          postId: currentPost?._id,
-        })
-      );
-    else dispatch(sendPost({ postData: { content: postContent }, token }));
+    if (postContent) {
+      if (isEdit)
+        dispatch(
+          editPost({
+            postData: { content: postContent },
+            token,
+            postId: currentPost?._id,
+          })
+        );
+      else dispatch(sendPost({ postData: { content: postContent }, token }));
 
-    dispatch(clearPostContent());
-    handleClose();
+      dispatch(clearPostContent());
+      handleClose();
+    }
   };
-  
-  const closeModal =() =>{
-    if (isEdit){
+
+  const closeModal = () => {
+    if (isEdit) {
       dispatch(clearPostContent());
     }
-    handleClose()
-  }
+    handleClose();
+  };
   return (
     <Modal open={isOpen} onClose={closeModal}>
       <Stack sx={signUpModalStyle} flexDirection="column" gap={1}>
@@ -73,7 +75,7 @@ export const CreatePostModal = ({
         <TextField
           multiline
           hiddenLabel
-          InputProps={{ disableUnderline: true }}
+          InputProps={{ disableUnderline: true, autoFocus: true }}
           rows={5}
           id="addPost"
           placeholder="What's on your Mind?"

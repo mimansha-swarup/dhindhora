@@ -16,6 +16,7 @@ import {
 import { red } from "@mui/material/colors";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 import { signUpHandler } from "../../helper/auth";
 import { LoginStyles } from "../../styles/Loginstyle";
@@ -45,6 +46,7 @@ const dispatch = useDispatch()
       onClose();
     } else {
       setPasswordState((prevState) => ({ ...prevState, isError: true }));
+      toast.error("Password dosen't match")
     }
   };
   return (

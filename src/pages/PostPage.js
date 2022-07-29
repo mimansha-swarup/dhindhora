@@ -41,7 +41,7 @@ export const PostPage = () => {
   } = useSelector((state) => state);
 
   const postInfo = allPosts.find((eachPost) => eachPost._id === postId);
-  const { content, username, updatedAt, comments } = postInfo;
+  const { content, username, createdAt, comments } = postInfo;
 
 
   const profilePicture = getCurrentUser(users, username)?.profilePicture;
@@ -58,7 +58,7 @@ export const PostPage = () => {
               {username}
             </Typography>
             <Typography variant="caption" component="p" color={grey[500]}>
-              {moment(updatedAt).fromNow()}
+              {moment(createdAt).fromNow()}
             </Typography>
           </Stack>
 
@@ -87,7 +87,9 @@ export const PostPage = () => {
         />
         <List>
           {[...comments].reverse().map((commentData) =>
-            editCommentId === commentData._id ? (
+          { 
+            console.log(commentData)
+           return editCommentId === commentData._id ? (
               <CommentBox
               key={commentData._id }
                 postId={postId}
@@ -116,7 +118,6 @@ export const PostPage = () => {
                       <MoreCommentMenu
                         postId={postId}
                         commentInfo={commentData}
-                        // setInputData={setInputEditData}
                       />
                     )}
                   </ListItemIcon>
@@ -132,11 +133,12 @@ export const PostPage = () => {
                   }}
                 >
                   <Typography ml={.5} color={grey[600]} variant="caption">
-                    {moment(commentData?.updatedAt).fromNow()}
+                    {moment(commentData?.createdAt).fromNow()}
                   </Typography>
                 </Box>
               </Stack>
             )
+                }
           )}
         </List>
       </Paper>

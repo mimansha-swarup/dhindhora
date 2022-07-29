@@ -1,6 +1,7 @@
 export const LoginStyles = {
   loginContainerStyle: (theme) => ({
     height: "100%",
+    display:"flex",
     [theme.breakpoints.up("sm")]: {
       py: 7,
     },
@@ -12,6 +13,7 @@ export const LoginStyles = {
   loginBoxStyle: {
     width: "100%",
     display: "flex",
+    alignSelf:"center",
     gap: 2,
     justifyContent: "space-around",
     flexDirection: {
@@ -33,11 +35,12 @@ export const LoginStyles = {
       py: 2,
     },
   }),
-
+  
   paperStyle: {
     p: 3,
     py: 4,
     width: { xs: "27ch", sm: "40ch" },
+    height:"fit-content",
     display: "flex",
     flexDirection: "column",
     gap: 2,

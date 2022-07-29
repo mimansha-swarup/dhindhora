@@ -1,3 +1,4 @@
+import { alpha } from "@mui/material";
 import { grey } from "@mui/material/colors";
 
 export const NavStyles = {
@@ -6,6 +7,7 @@ export const NavStyles = {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    px: 5,
 
     [theme.breakpoints.only("sm")]: {
       px: 3,
@@ -40,10 +42,37 @@ export const NavStyles = {
     justifyContent: "space-between",
     display: { xs: "flex", sm: "none" },
   },
-  actionbarStyle: { mr: 3, display: { xs: "none", sm: "flex" } },
+  actionbarStyle: { mr: {sm:0,lg:3}, display: { xs: "none", sm: "flex" } },
   dpStyle: { width: 30, height: 30 },
   brandImageStyle: {
     display: { xs: "none", sm: "flex" },
     ml: 3,
   },
 };
+
+export const SearchStyle = (theme) => 
+
+   ({
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    border: `1px solid ${alpha(theme.palette.info.main, 0.35)}`,
+    display: { xs: "none", sm: "flex" },
+    justifyContent: "center",
+    alignItems: "center",
+    color: theme.palette.grey["500"],
+    px:2,
+    backgroundColor: alpha(theme.palette.info.light, 0.08),
+    "&:hover": {
+      backgroundColor: alpha(theme.palette.info.main, 0.05),
+    },
+    marginLeft: theme.spacing(2),
+    marginRight: 0,
+    width: "40%",
+  
+  });
+
+
+export const SearchInputStyle = (theme) => ({
+  flexGrow: "2",
+  color: theme.palette.grey["900"],
+});

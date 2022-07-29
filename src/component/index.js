@@ -1,3 +1,4 @@
+export { SearchBar } from "./Navbar/SearchBar";
 export { MorePostMenu } from "./Home/MorePostMenu";
 export { CommentBox } from "./Home/CommentBox";
 export { MoreCommentMenu } from "./Home/MoreCommentMenu";

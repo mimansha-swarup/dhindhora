@@ -55,7 +55,7 @@ export const ProfileHeader = ({ currUser }) => {
         sx={{ display: { xs: "flex", sm: "none" }, color: grey[600] }}
         onClick={() => dispatch(signOutHandler())}
       >
-        <Logout sx={{ ml: "auto" }} />
+        <Logout sx={{ ml: "auto",cursor:"pointer" }} />
       </Box>
       <Stack alignItems="center" gap={1}>
         <Stack flexDirection="row" gap={1} width="100%" flexWrap="wrap">

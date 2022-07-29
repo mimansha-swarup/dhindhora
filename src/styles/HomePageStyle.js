@@ -18,7 +18,7 @@ export const HomePageStyles = {
   AddPostInputStyle: { width: "100%" },
 
   // Post
-  PostContainerStyle: { my: 1.5, borderRadius: 3 },
+  PostContainerStyle: { my: 3, borderRadius: 3 },
   UserNameStyle: { lineHeight: 1 },
   PostDividerStyle: { width: "90%", m: "auto" },
   PostActionButtonStyles: {
@@ -29,7 +29,7 @@ export const HomePageStyles = {
     gap: {xs:1,sm:1.25
     ,}
   },
-  SortDividerStyle : { width:"100%" },
+  SortDividerStyle : { width:"100%" ,my:1.25},
   SortLabelStyle :{ color: grey[500],mr:1 },
   SortSelcetStyle :{ p:0,m:0 },
 };

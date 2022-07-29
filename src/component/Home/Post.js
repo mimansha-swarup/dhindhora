@@ -24,7 +24,7 @@ export const Post = ({ postInfo }) => {
     PostDividerStyle,
   } = HomePageStyles;
 
-  const { _id = "", content, username, updatedAt } = postInfo;
+  const { _id = "", content, username, createdAt } = postInfo;
 
   const {
     user: { users },
@@ -46,7 +46,7 @@ export const Post = ({ postInfo }) => {
             {username}
           </Typography>
           <Typography variant="caption" component="p" color={grey[500]}>
-            {moment(updatedAt).fromNow()}
+            {moment(createdAt).fromNow()}
           </Typography>
         </Stack>
 
